@@ -17,7 +17,7 @@ class User:
 
 
 # opening the file using DictReader
-file = csv.DictReader(open('dataset/spotify_dataset.csv', 'r'))
+file = csv.DictReader(open('spotify_dataset.csv', 'r'))
 all_songs: List[Dict[str, any]] = []
     
 # looping through the file and cleaning the dictionary values
