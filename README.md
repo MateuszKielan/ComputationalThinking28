@@ -10,8 +10,8 @@ It consists of 3 parts:
   3. In the third part we generate 5 songs based on the users mood
   
 File structure:
-  spotify_dataset.csv: represents the dataset od the songs that we are working with in the program
-  Base.py: is used for dataset handling/cleaning, input/output of the program and connecting several parts of the program togeather
-  task1.py | task2.py | task3.py: they correspond to 1st 2nd and 3rd part of the project described above.
+  1. spotify_dataset.csv: represents the dataset od the songs that we are working with in the program
+  2. Base.py: is used for dataset handling/cleaning, input/output of the program and connecting several parts of the program togeather
+  3. task1.py | task2.py | task3.py: they correspond to 1st 2nd and 3rd part of the project described above.
   
  
