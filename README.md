@@ -10,4 +10,4 @@ It consists of 3 parts:
   ....
   
 File structure:
-Each file corresponds to one of those 3 parts. Base.py file is used for dataset handling and input / output of the [rpgram
+Each file corresponds to one of those 3 parts. Base.py file is used for dataset handling and input / output of the program
