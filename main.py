@@ -7,13 +7,14 @@ class User:
     Class user.
     This class represents every user in the system.
     """
-    def __init__(self, user_songs: List) -> None:
+    def __init__(self, user_songs: List, number:int) -> None:
         """
         Class initializer.
         Has one atribute:
             atr: user_songs = list of songs listened by user
         """
         self.user_songs = user_songs
+        self.number = number
 
 
 # opening the file using DictReader
@@ -36,7 +37,7 @@ list_of_users = []
 # Creating 100 users. Each user has 20 random songs
 for i in range(1, 101):
     random_songs = random.sample(all_songs, 20)
-    new_user: User = User(random_songs)
+    new_user: User = User(random_songs, i)
     list_of_users.append(new_user)
 
 
