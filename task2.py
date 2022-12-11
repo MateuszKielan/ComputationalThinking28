@@ -10,16 +10,6 @@ def find_genre(user_songs: List[Dict[str, any]], all_songs) -> List[str]:
     Creates the dictionary with name of the genre as the key and number of occurrences in user_songs as value.
     Calls the function find_favourite.
     """
-    # rock = ['alaska indie', 'alternative r&b', 'canadian contemporary r&b', 'celtic rock', 'irish singer-songwriter',
-    # 'neo mellow', 'permanent wave']
-
-    # techno = ['belgian edm', 'big room', 'brostep', 'complextro', 'electro', 'electro house', 'electronic trap',
-    # 'house', 'tropical house']
-
-    # pop = ['australian dance', 'atl hip hop', 'australian hip hop', 'boy band', 'british soul', 'canadian hip hop',
-    # 'chicago rap', 'contemporary country', 'detroit hip hop', 'downtempo', 'edm', 'hollywood', 'latin']
-
-    # creating a variable genre_dict to store all the genres that user has listened to and count occurences
     genre_dict: Dict[str, int] = {}
 
     # loop through every song in user_songs
