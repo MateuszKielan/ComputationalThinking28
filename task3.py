@@ -1,7 +1,7 @@
 from typing import List, Dict
 from statistics import mean
 from main import *
-def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List[any]]:
+def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[Dict[str, any]]:
 
     # Global variables
     avg_valence: float = mean([x["Valence - The higher the value, the more positive mood for the song"] for x in all_songs])
@@ -18,7 +18,7 @@ def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List
     avg_length: float = mean([x["Length - The duration of the song"] for x in all_songs])
     avg_loudness: float = mean([x["Loudness/dB - The higher the value, the louder the song"] for x in all_songs])
 
-    def type_det(song: List[any]) -> List[int]:
+    def type_det(song: Dict[str, any]) -> List[int]:
         """
         The function takes a song as input and return its types based on a few criteria.
 
@@ -91,8 +91,8 @@ def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List
 
     pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
 
-    first_list: List[List[any]] = []
-    second_list: List[List[any]] = []
+    first_list: List[Dict[str, any]] = []
+    second_list: List[Dict[str, any]] = []
 
     for song in all_songs:
         if type_det(song)[len(pref_dict) - 1][0] == 1:
@@ -100,7 +100,7 @@ def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List
         if type_det(song)[len(pref_dict) - 2][0] == 1:
             second_list.append(song)
 
-    suggestions: List[List[any]] = []
+    suggestions: List[Dict[str, any]] = []
     if first_list >= 3 and second_list >= 2:
         suggestions.append(random.sample(first_list, 3))
         suggestions.append((random.sample(second_list, 2)))
