@@ -1,6 +1,7 @@
 from typing import List, Dict
 from statistics import mean
-from main import *
+import random
+
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[Dict[str, any]]:
 
     # Global variables
