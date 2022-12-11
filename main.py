@@ -15,7 +15,8 @@ class User:
         """
         Class initializer.
         Has one atribute:
-            atr: user_songs = list of songs listened by user
+            :atr user_songs: list of songs listened by user
+            :atr number: user number
         """
         self.user_songs = user_songs
         self.number = number
