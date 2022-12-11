@@ -91,7 +91,7 @@ def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List
 
     pref_type: int = max(pref_dict, key=pref_dict.get)
     suggestions: List[List[any]] = []
-    while len(suggestions) < 5:
+    while len(suggestions) == 5:
         random_song: List[any] = random.choice(all_songs)
         if type_det(random_song)[pref_type] == 1:
             suggestions.append(random_song)
