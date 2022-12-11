@@ -1,6 +1,6 @@
 from typing import List, Dict
 from statistics import mean
-import random
+from main import *
 
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List[List[any]]:
     # Global variables
@@ -117,4 +117,8 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List
         if len(suggestions) < 5:
             suggestions.append(random.sample(all_songs, 5 - len(suggestions)))
 
-    return suggestions
+    suggested_songs: List[str] = []
+    for song in suggestions:
+        suggested_songs.append(song["title"])
+
+    return suggested_songs
