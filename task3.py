@@ -89,12 +89,32 @@ def week_3(all_songs: List[List[any]], user_songs: List[List[any]]) -> List[List
         if type_det(song)[3] == 1:
             pref_dict[3] = pref_dict.get(3, 0) + 1
 
-    pref_type: int = max(pref_dict, key=pref_dict.get)
+    pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
+
+    first_list: List[List[any]] = []
+    second_list: List[List[any]] = []
+
+    for song in all_songs:
+        if type_det(song)[len(pref_dict) - 1][0] == 1:
+            first_list.append(song)
+        if type_det(song)[len(pref_dict) - 2][0] == 1:
+            second_list.append(song)
+
     suggestions: List[List[any]] = []
-    while len(suggestions) == 5:
-        random_song: List[any] = random.choice(all_songs)
-        if type_det(random_song)[pref_type] == 1:
-            suggestions.append(random_song)
+    if first_list >= 3 and second_list >= 2:
+        suggestions.append(random.sample(first_list, 3))
+        suggestions.append((random.sample(second_list, 2)))
+    elif first_list >= 5 - len(second_list):
+        suggestions.append((random.sample(second_list, len(second_list))))
+        suggestions.append(random.sample(first_list, 5 - len(suggestions)))
+    elif second_list >= 5 - len(first_list):
+        suggestions.append(random.sample(first_list, len(first_list)))
+        suggestions.append((random.sample(second_list, 5 - len(suggestions))))
+    else:
+        suggestions.append(random.sample(first_list, len(first_list)))
+        suggestions.append((random.sample(second_list, len(second_list))))
+        if len(suggestions) < 5:
+            suggestions.append(random.sample(all_songs, 5 - len(suggestions)))
 
     return suggestions
 
