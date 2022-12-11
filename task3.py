@@ -1,21 +1,22 @@
 from typing import List, Dict
 from statistics import mean
-import random
+from main import *
 
-def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[Dict[str, any]]:
-
+def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List[List[any]]:
     # Global variables
-    avg_valence: float = mean([x["Valence - The higher the value, the more positive mood for the song"] for x in all_songs])
+    avg_valence: float = mean(
+        [x["Valence - The higher the value, the more positive mood for the song"] for x in all_songs])
     avg_liveness: float = mean(
-    [x["Liveness - The higher the value, the more likely the song is a live recording"] for x in all_songs])
+        [x["Liveness - The higher the value, the more likely the song is a live recording"] for x in all_songs])
     avg_speechiess: float = mean(
-    [x["Speechiness - The higher the value the more spoken word the song contains"] for x in all_songs])
+        [x["Speechiness - The higher the value the more spoken word the song contains"] for x in all_songs])
     avg_BPM: float = mean([x["Beats.Per.Minute -The tempo of the song"] for x in all_songs])
     avg_energy: float = mean(
-    [x["Energy- The energy of a song - the higher the value, the more energtic"] for x in all_songs])
+        [x["Energy- The energy of a song - the higher the value, the more energtic"] for x in all_songs])
     avg_danceability: float = mean(
-    [x["Danceability - The higher the value, the easier it is to dance to this song"] for x in all_songs])
-    avg_popularity: float = mean([x["Popularity- The higher the value the more popular the song is"] for x in all_songs])
+        [x["Danceability - The higher the value, the easier it is to dance to this song"] for x in all_songs])
+    avg_popularity: float = mean(
+        [x["Popularity- The higher the value the more popular the song is"] for x in all_songs])
     avg_length: float = mean([x["Length - The duration of the song"] for x in all_songs])
     avg_loudness: float = mean([x["Loudness/dB - The higher the value, the louder the song"] for x in all_songs])
 
@@ -26,8 +27,8 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
         The types of a song are represented as list if the song is a particular type its value is 1, 0 otherwise:
         0 - Happy
         1 - Party
-        2- Calming
-        3- Lounge
+        2 - Calming
+        3 - Lounge
 
         Criteria:
             1. Happy:
@@ -91,24 +92,24 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             pref_dict[3] = pref_dict.get(3, 0) + 1
 
     pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
-
+    print(pref_dict)
     first_list: List[Dict[str, any]] = []
     second_list: List[Dict[str, any]] = []
 
     for song in all_songs:
-        if type_det(song)[len(pref_dict) - 1][0] == 1:
+        if type_det(song)[pref_dict[-1][0]] == 1:
             first_list.append(song)
-        if type_det(song)[len(pref_dict) - 2][0] == 1:
+        if type_det(song)[pref_dict[-2][0]] == 1:
             second_list.append(song)
 
-    suggestions: List[Dict[str, any]] = []
-    if first_list >= 3 and second_list >= 2:
+    suggestions: List[List[any]] = []
+    if len(first_list) >= 3 and len(second_list) >= 2:
         suggestions.append(random.sample(first_list, 3))
         suggestions.append((random.sample(second_list, 2)))
-    elif first_list >= 5 - len(second_list):
+    elif len(first_list) >= 5 - len(second_list):
         suggestions.append((random.sample(second_list, len(second_list))))
         suggestions.append(random.sample(first_list, 5 - len(suggestions)))
-    elif second_list >= 5 - len(first_list):
+    elif len(second_list) >= 5 - len(first_list):
         suggestions.append(random.sample(first_list, len(first_list)))
         suggestions.append((random.sample(second_list, 5 - len(suggestions))))
     else:
@@ -118,5 +119,3 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             suggestions.append(random.sample(all_songs, 5 - len(suggestions)))
 
     return suggestions
-
-
