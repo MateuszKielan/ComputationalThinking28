@@ -2,7 +2,8 @@ from typing import List, Dict
 from statistics import mean
 import random
 
-def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List[List[any]]:
+def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[str]:
+
     # Global variables
     avg_valence: float = mean(
         [x["Valence - The higher the value, the more positive mood for the song"] for x in all_songs])
