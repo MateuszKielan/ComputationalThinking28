@@ -1,6 +1,6 @@
 from typing import List, Dict
 from statistics import mean
-from main import *
+import random
 
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List[List[any]]:
     # Global variables
@@ -92,7 +92,6 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List
             pref_dict[3] = pref_dict.get(3, 0) + 1
 
     pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
-    print(pref_dict)
     first_list: List[Dict[str, any]] = []
     second_list: List[Dict[str, any]] = []
 
