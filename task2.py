@@ -15,9 +15,9 @@ def find_genre(user_songs: List[Dict[str, any]], all_songs) -> List[str]:
     # loop through every song in user_songs
     for song in user_songs:
         if song['the genre of the track'] in genre_dict:
-            genre_dict['the genre of the track'] += 1
+            genre_dict[song['the genre of the track']] += 1
         elif song['the genre of the track'] not in genre_dict:
-            genre_dict['the genre of the track'] = 1
+            genre_dict[song['the genre of the track']] = 1
 
     # call the function fin_favourite that finds the most popular genre
     return find_favourite(genre_dict, all_songs)

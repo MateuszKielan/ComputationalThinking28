@@ -3,7 +3,7 @@ import csv
 import random
 from task1 import program_1
 from task2 import find_genre
-from task3 import type_det
+#from task3 import type_det
 
 class User:
     """
@@ -46,7 +46,5 @@ for i in range(1, 101):
 
 # here call three tasks
 for user in list_of_users:
-    task_1_results = program_1(all_playlists, user.user_songs)
     task_2_results = find_genre(user.user_songs, all_songs)
-    task_3_results = type_det()
 
