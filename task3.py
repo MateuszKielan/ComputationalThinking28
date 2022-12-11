@@ -1,6 +1,6 @@
 from typing import List, Dict
 from statistics import mean
-from main import *
+import random
 
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List[List[any]]:
     # Global variables
@@ -101,19 +101,19 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[List[any]]) -> List
         if type_det(song)[pref_dict[-2][0]] == 1:
             second_list.append(song)
 
-    suggestions: List[List[any]] = []
+    suggestions: List[Dict[str, any]] = []
     if len(first_list) >= 3 and len(second_list) >= 2:
         suggestions.append(random.sample(first_list, 3))
-        suggestions.append((random.sample(second_list, 2)))
+        suggestions.append(random.sample(second_list, 2))
     elif len(first_list) >= 5 - len(second_list):
-        suggestions.append((random.sample(second_list, len(second_list))))
+        suggestions.append(random.sample(second_list, len(second_list)))
         suggestions.append(random.sample(first_list, 5 - len(suggestions)))
     elif len(second_list) >= 5 - len(first_list):
         suggestions.append(random.sample(first_list, len(first_list)))
-        suggestions.append((random.sample(second_list, 5 - len(suggestions))))
+        suggestions.append(random.sample(second_list, 5 - len(suggestions)))
     else:
         suggestions.append(random.sample(first_list, len(first_list)))
-        suggestions.append((random.sample(second_list, len(second_list))))
+        suggestions.append(random.sample(second_list, len(second_list)))
         if len(suggestions) < 5:
             suggestions.append(random.sample(all_songs, 5 - len(suggestions)))
 
