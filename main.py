@@ -3,14 +3,15 @@ import csv
 import random
 from task1 import program_1
 from task2 import find_genre
-#from task3 import type_det
+from task3 import week_3
+
 
 class User:
     """
     Class user.
     This class represents every user in the system.
     """
-    def __init__(self, user_songs: List, number:int) -> None:
+    def __init__(self, user_songs: List[Dict[str, any]], number: int) -> None:
         """
         Class initializer.
         Has one atribute:
@@ -47,4 +48,5 @@ for i in range(1, 101):
 # here call three tasks
 for user in list_of_users:
     task_2_results = find_genre(user.user_songs, all_songs)
-
+    task_3_results = week_3(all_songs, user.user_songs)
+    print(task_3_results)
