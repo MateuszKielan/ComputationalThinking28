@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import List, Dict
 import csv
 import random
@@ -45,9 +46,46 @@ for i in range(1, 101):
     new_user: User = User(random_songs, i)
     list_of_users.append(new_user)
 
+dict_of_playlist: Dict[int, List[Dict[str, any]]] = {}
+
+for i in range(1, 101):
+    dict_of_playlist[i] = random.sample(all_songs, 50)
+
+
+
+output_file_name = input('What will be the name of your output file? ')
+
+path = Path(__file__).parent / f'../ComputationalThinking28/{output_file_name}.txt'
+
+# writing to the file
+with open(path, 'w', encoding='utf-8') as out_file:
+    # write the title of the file
+    out_file.write("Discover Weekly\n\n")
+    out_file.write("Week 1\n")
+    for user in list_of_users:
+        out_file.write(f'User: {user.number}')
+        task_1_result = program_1(dict_of_playlist, user.user_songs)
+        out_file.write(f'{str(task_1_result)}\n')
+    out_file.write("\n")
+
+    out_file.write("Week 2\n")
+    # loop through the users and call the tasks
+    for user in list_of_users:
+        out_file.write(f'User: {user.number}')
+        task_2_result = find_genre(user.user_songs, all_songs)
+        out_file.write(f'{str(task_2_result)}\n')
+
+    out_file.write("\n")
+    out_file.write("Week 3\n")
+    for user in list_of_users:
+        out_file.write(f'User: {user.number}')
+        task_3_result = week_3(all_songs, user.user_songs)
+        out_file.write(f'{str(task_3_result)}\n')
+
+
+    #task_2_results = find_genre(user.user_songs, all_songs)
+    #task_3_results = week_3(all_songs, user.user_songs)
+    #print(task_1_result)
 
 # here call three tasks
-for user in list_of_users:
-    task_2_results = find_genre(user.user_songs, all_songs)
-    task_3_results = week_3(all_songs, user.user_songs)
-    print(task_3_results)
+

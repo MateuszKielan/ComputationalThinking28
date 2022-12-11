@@ -1,7 +1,10 @@
+from typing import List, Dict
+import random
 
-def program_1(all_playlists : dict, user_songs : list) -> str:
+
+def program_1(all_playlists : Dict[int, List[Dict[str, any]]], user_songs : list) -> any:
     '''This function searches for playlist that fits certain requirements in respect to which songs the user have lisened 
-    to in the dictionary of 67 playlists'''
+    to in the dictionary of 100 playlists'''
 
     chosen_playlist = -1
 
@@ -23,7 +26,12 @@ def program_1(all_playlists : dict, user_songs : list) -> str:
     if chosen_playlist == -1:
         return 'Playlist not found'
     else:
-        return f'found playlist: {chosen_playlist}'
+        recommended: List[str] = []
+        for x in all_playlists[chosen_playlist]:
+            recommended.append(x['title'])
+
+        return random.sample(recommended, 5)
+
 
     
 
