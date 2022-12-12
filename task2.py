@@ -39,7 +39,7 @@ def find_favourite(genre_dict: Dict[str, int], all_songs) -> List[str]:
         for j in range(0, len(genre_list) - i - 1):
             if genre_list[j][1] > genre_list[j + 1][1]:
                 genre_list[j], genre_list[j+1] = genre_list[j+1], genre_list[j]
-
+    # taking the last element of the list
     favourite_genre = genre_list[-1][0]
 
     # searching for the songs with the same genre using linear search and adding songs to the list
@@ -50,6 +50,7 @@ def find_favourite(genre_dict: Dict[str, int], all_songs) -> List[str]:
     # taking 5 random songs from the list of favourite music
     if len(favourite_genre_list) >= 5:
         final_choice: List[str] = random.sample(favourite_genre_list, 5)
+    # if there arent enough songs fill the list with random songs
     else:
         final_choice: List[str] = random.sample(favourite_genre_list, len(favourite_genre_list))
         fill: int = 5 - len(favourite_genre_list)
