@@ -4,8 +4,8 @@ import random
 
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[str]:
     """
-    The function takes a list of all songs and songs already listened to by the user and 
-    returns 5 songs based on the type of music the user listened to previously.
+    The function takes a list of all songs and songs already listened to by a user and 
+    returns 5 songs based on the type of music a user listened to previously.
     """
     # Global variables are created - average values of features
     avg_valence: float = mean(
@@ -53,8 +53,10 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
                 - length > average lenght of all songs
                 - loudness < average loudness of all songs
         """
+        # Types of a song are stored in the list where each index refers to a different type (indexes explained in docstring)
         types: List[int] = [0, 0, 0, 0]
 
+        # Creating variables that refer to particular features
         valence: int = song["Valence - The higher the value, the more positive mood for the song"]
         liveness: int = song["Liveness - The higher the value, the more likely the song is a live recording"]
         speechiess: int = song["Speechiness - The higher the value the more spoken word the song contains"]
@@ -65,6 +67,8 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
         length: int = song["Length - The duration of the song"]
         loudness: int = song["Loudness/dB - The higher the value, the louder the song"]
 
+        # If the song meets the requirements of the given type, its value in the "types" is changed to 1
+        
         # Happy
         if valence > avg_valence and liveness > avg_liveness and speechiess > avg_speechiess:
             types[0] = 1
@@ -82,8 +86,12 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             types[3] = 1
 
         return types
+    
+    # "pref_dict" will track the frequency of types among the songs already listened to by a user 
 
     pref_dict: Dict[int, int] = {}
+        
+    # Iterate over the songs already listened to by a user and add 1 to the  "pref_dict" value if a particular type was listened to by a user.
 
     for song in user_songs:
         if type_det(song)[0] == 1:
@@ -94,18 +102,29 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             pref_dict[2] = pref_dict.get(2, 0) + 1
         if type_det(song)[3] == 1:
             pref_dict[3] = pref_dict.get(3, 0) + 1
-
+            
+    # Create list of ascendingly sorted tuple of "pref_dict"
     pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
-    first_list: List[Dict[str, any]] = []
-    second_list: List[Dict[str, any]] = []
-    suggestions: List[Dict[str, any]] = []
+        
+    # Support variables are created 
+    first_list: List[Dict[str, any]] = [] # "first_list" will contain the best type songs
+    second_list: List[Dict[str, any]] = [] # "second_list" will contain second best type songs
+    suggestions: List[Dict[str, any]] = [] # "suggestions" will contain 5 songs to be recommended to a user
 
+    # This condition checks if there was more than one type listened to 
     if len(pref_dict) > 1:
+        
+        # Iterate over all songs and add a song to the "first_list" if it is the same type as the most popular type
+        #                            add a song to the "second_lsit" if it is the same type as second most popular type
         for song in all_songs:
             if type_det(song)[pref_dict[-1][0]] == 1:
                 first_list.append(song)
             if type_det(song)[pref_dict[-2][0]] == 1:
                 second_list.append(song)
+                
+        # If there are at least 3 songs in the "first_list" and 2 songs in the "second_list", random 3 and 2 songs respectively are added to the "suggestions"
+        # If there are fewer songs than it is required it adds more from the other list
+        # In the situation when both lists are too small to recommend 5 songs, random songs chosen from all songs are added
         if len(first_list) >= 3 and len(second_list) >= 2:
             suggestions = random.sample(first_list, 3) + random.sample(second_list, 2)
         elif len(first_list) >= 5 - len(second_list):
@@ -116,13 +135,21 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             suggestions = random.sample(first_list, len(first_list)) + random.sample(second_list, len(second_list))
             if len(suggestions) < 5:
                 suggestions = suggestions + random.sample(all_songs, 5 - len(suggestions))
+                
+    # If fewer than different types were listened to by a user, all 5 songs are chosen from the most popular playlist. 
+    # If the most popular playlist does not have 5 elements, random songs are added.
     else:
         for song in all_songs:
             if type_det(song)[pref_dict[-1][0]] == 1:
                 first_list.append(song)
-        suggestions = random.sample(first_list,5)
+        if len(first_list) >= 5:
+            suggestions = random.sample(first_list,5)
+        else:
+            suggestions = random.sample(first_list, len(first_list)) + random.sample(all_songs, 5 - len(first_list)
+                                                                                    
+    # The list of songs (Dictionaries) is transformed to the list of songs titles    
     suggested_songs: List[str] = []
     for song in suggestions:
         suggested_songs.append(song["title"])
-
-    return suggested_songs
+                                                                                     
+    return suggested_songs # The function returns the list of 5 songs titles that are recommended
