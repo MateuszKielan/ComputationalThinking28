@@ -3,8 +3,11 @@ from statistics import mean
 import random
 
 def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) -> List[str]:
-
-    # Global variables
+    """
+    The function takes a list of all songs and songs already listened to by the user and 
+    returns 5 songs based on the type of music the user listened to previously.
+    """
+    # Global variables are created - average values of features
     avg_valence: float = mean(
         [x["Valence - The higher the value, the more positive mood for the song"] for x in all_songs])
     avg_liveness: float = mean(
