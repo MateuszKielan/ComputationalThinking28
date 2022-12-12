@@ -145,7 +145,7 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
         if len(first_list) >= 5:
             suggestions = random.sample(first_list,5)
         else:
-            suggestions = random.sample(first_list, len(first_list)) + random.sample(all_songs, 5 - len(first_list)
+            suggestions = random.sample(first_list, len(first_list)) + random.sample(all_songs, 5 - len(first_list))
                                                                                     
     # The list of songs (Dictionaries) is transformed to the list of songs titles    
     suggested_songs: List[str] = []
