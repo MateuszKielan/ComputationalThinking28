@@ -110,18 +110,17 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
     first_list: List[Dict[str, any]] = [] # "first_list" will contain the best type songs
     second_list: List[Dict[str, any]] = [] # "second_list" will contain second best type songs
     suggestions: List[Dict[str, any]] = [] # "suggestions" will contain 5 songs to be recommended to a user
-
-    # This condition checks if there was more than one type listened to 
-    if len(pref_dict) > 1:
         
-        # Iterate over all songs and add a song to the "first_list" if it is the same type as the most popular type
-        #                            add a song to the "second_lsit" if it is the same type as second most popular type
-        for song in all_songs:
-            if type_det(song)[pref_dict[-1][0]] == 1:
-                first_list.append(song)
-            if type_det(song)[pref_dict[-2][0]] == 1:
-                second_list.append(song)
-                
+    # Iterate over all songs and add a song to the "first_list" if it is the same type as the most popular type
+    #                            add a song to the "second_lsit" if it is the same type as second most popular type    
+    for song in all_songs:
+        if type_det(song)[pref_dict[-1][0]] == 1:
+            first_list.append(song)
+        if type_det(song)[pref_dict[-2][0]] == 1:
+            second_list.append(song)
+            
+    # This condition checks if there was more than one type listened to 
+    if len(pref_dict) > 1:     
         # If there are at least 3 songs in the "first_list" and 2 songs in the "second_list", random 3 and 2 songs respectively are added to the "suggestions"
         # If there are fewer songs than it is required it adds more from the other list
         # In the situation when both lists are too small to recommend 5 songs, random songs chosen from all songs are added
