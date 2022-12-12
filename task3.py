@@ -95,25 +95,29 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
     pref_dict: List[tuple] = list(sorted(pref_dict.items(), key=lambda x: x[1]))
     first_list: List[Dict[str, any]] = []
     second_list: List[Dict[str, any]] = []
-
-    for song in all_songs:
-        if type_det(song)[pref_dict[-1][0]] == 1:
-            first_list.append(song)
-        if type_det(song)[pref_dict[-2][0]] == 1:
-            second_list.append(song)
-
     suggestions: List[Dict[str, any]] = []
-    if len(first_list) >= 3 and len(second_list) >= 2:
-        suggestions = random.sample(first_list, 3) + random.sample(second_list, 2)
-    elif len(first_list) >= 5 - len(second_list):
-        suggestions = random.sample(second_list, len(second_list)) + random.sample(first_list, 5 - len(suggestions))
-    elif len(second_list) >= 5 - len(first_list):
-        suggestions = random.sample(first_list, len(first_list)) + random.sample(second_list, 5 - len(suggestions))
-    else:
-        suggestions = random.sample(first_list, len(first_list)) + random.sample(second_list, len(second_list))
-        if len(suggestions) < 5:
-            suggestions = suggestions + random.sample(all_songs, 5 - len(suggestions))
 
+    if len(pref_dict) > 1:
+        for song in all_songs:
+            if type_det(song)[pref_dict[-1][0]] == 1:
+                first_list.append(song)
+            if type_det(song)[pref_dict[-2][0]] == 1:
+                second_list.append(song)
+        if len(first_list) >= 3 and len(second_list) >= 2:
+            suggestions = random.sample(first_list, 3) + random.sample(second_list, 2)
+        elif len(first_list) >= 5 - len(second_list):
+            suggestions = random.sample(second_list, len(second_list)) + random.sample(first_list, 5 - len(suggestions))
+        elif len(second_list) >= 5 - len(first_list):
+            suggestions = random.sample(first_list, len(first_list)) + random.sample(second_list, 5 - len(suggestions))
+        else:
+            suggestions = random.sample(first_list, len(first_list)) + random.sample(second_list, len(second_list))
+            if len(suggestions) < 5:
+                suggestions = suggestions + random.sample(all_songs, 5 - len(suggestions))
+    else:
+        for song in all_songs:
+            if type_det(song)[pref_dict[-1][0]] == 1:
+                first_list.append(song)
+        suggestions = random.sample(first_list,5)
     suggested_songs: List[str] = []
     for song in suggestions:
         suggested_songs.append(song["title"])
