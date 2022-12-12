@@ -136,7 +136,7 @@ def week_3(all_songs: List[Dict[str, any]], user_songs: List[Dict[str, any]]) ->
             if len(suggestions) < 5:
                 suggestions = suggestions + random.sample(all_songs, 5 - len(suggestions))
                 
-    # If fewer than different types were listened to by a user, all 5 songs are chosen from the most popular playlist. 
+    # If only one type was listened to by a user, all 5 songs are chosen from the most popular playlist. 
     # If the most popular playlist does not have 5 elements, random songs are added.
     else:
         for song in all_songs:
