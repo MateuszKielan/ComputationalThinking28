@@ -14,4 +14,8 @@ File structure:
   2. main.py: is used for dataset handling/cleaning, input/output of the program and connecting several parts of the program togeather
   3. task1.py | task2.py | task3.py: they correspond to 1st 2nd and 3rd part of the project described above.
   
+How to open the project:
+  1. Open the main.py and run it.
+  2. When running main.py you will get an message to input the file name in the terminal. You can choose any name.
+  3. After that press enter and a txt file will appear in the directory. This is the file with output for all 3 tasks.
  
